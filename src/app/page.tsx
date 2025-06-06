@@ -94,14 +94,16 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="relative h-[400px] rounded-2xl overflow-hidden"
+              className="relative h-[500px] md:h-[600px] rounded-2xl overflow-hidden shadow-xl"
             >
               <Image
                 src="/profile.jpg"
-                alt="Aishwarya Wagh"
+                alt="Aishwarya Wagh - AIML Engineer"
                 fill
-                className="object-cover"
+                className="object-cover object-[center_15%]"
                 priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={100}
               />
             </motion.div>
           </div>
