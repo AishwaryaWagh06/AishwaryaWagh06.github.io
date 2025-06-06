@@ -364,7 +364,7 @@ export default function Home() {
                     </svg>
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/aishwarya-wagh-b2b4b0290"
+                    href="https://www.linkedin.com/in/aishwarya-wagh-460355366/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors"
@@ -479,7 +479,7 @@ export default function Home() {
               </svg>
             </a>
             <a
-              href="https://www.linkedin.com/in/aishwarya-wagh-b2b4b0290"
+              href="https://www.linkedin.com/in/aishwarya-wagh-460355366/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-500"
