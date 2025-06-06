@@ -58,10 +58,15 @@ export default function Home() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    console.log('Input changed:', name, value); // Add logging for debugging
+    setFormData(prev => {
+      const newState = {
+        ...prev,
+        [name]: value
+      };
+      console.log('New form state:', newState); // Add logging for debugging
+      return newState;
+    });
   };
 
   return (
@@ -437,7 +442,7 @@ export default function Home() {
                     onChange={handleChange}
                     placeholder="Enter your name"
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                    className="mt-1 block w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
                   />
                 </div>
                 <div>
@@ -452,7 +457,7 @@ export default function Home() {
                     onChange={handleChange}
                     placeholder="Enter your email"
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                    className="mt-1 block w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
                   />
                 </div>
                 <div>
@@ -467,7 +472,7 @@ export default function Home() {
                     onChange={handleChange}
                     placeholder="What's this about?"
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                    className="mt-1 block w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
                   />
                 </div>
                 <div>
@@ -482,7 +487,7 @@ export default function Home() {
                     rows={4}
                     placeholder="Tell me about your project or idea..."
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white resize-none"
+                    className="mt-1 block w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-white resize-none"
                   />
                 </div>
                 
