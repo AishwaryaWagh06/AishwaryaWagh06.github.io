@@ -1,27 +1,60 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import imageLoader from '../image-loader';
+import emailjs from '@emailjs/browser';
 
 export default function Home() {
+  const form = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = `mailto:ashwaghashwagh@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const result = await emailjs.sendForm(
+        'service_zgf5qwn',
+        'template_0xm5ttr',
+        form.current!,
+        '9VaiECe9UQ02-2pZi'
+      );
+
+      if (result.text === 'OK') {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Message sent successfully! I will get back to you soon.'
+        });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      }
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: 'Failed to send message. Please try again or email me directly.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
-      [e.target.id]: e.target.value
+      [e.target.name]: e.target.value
     });
   };
 
@@ -59,7 +92,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
-              className="mt-8 flex justify-center gap-4"
+              className="mt-8 flex flex-wrap justify-center gap-4"
             >
               <a
                 href="#contact"
@@ -72,6 +105,27 @@ export default function Home() {
                 className="px-8 py-3 rounded-full border border-blue-600 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
               >
                 View Projects
+              </a>
+              <a
+                href="/documents/AishwaryaWagh_Resume.pdf"
+                download
+                className="px-8 py-3 rounded-full bg-green-600 text-white hover:bg-green-700 transition-colors flex items-center gap-2"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="h-5 w-5" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
+                  />
+                </svg>
+                Download Resume
               </a>
             </motion.div>
           </div>
@@ -362,7 +416,7 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8"
             >
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form ref={form} onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Your Name
@@ -370,6 +424,7 @@ export default function Home() {
                   <input
                     type="text"
                     id="name"
+                    name="user_name"
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Enter your name"
@@ -384,6 +439,7 @@ export default function Home() {
                   <input
                     type="email"
                     id="email"
+                    name="user_email"
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Enter your email"
@@ -398,6 +454,7 @@ export default function Home() {
                   <input
                     type="text"
                     id="subject"
+                    name="subject"
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="What's this about?"
@@ -411,22 +468,49 @@ export default function Home() {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     value={formData.message}
                     onChange={handleChange}
                     rows={4}
                     placeholder="Tell me about your project or idea..."
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white resize-none"
                   />
                 </div>
+                
+                {submitStatus.type && (
+                  <div
+                    className={`p-4 rounded-md ${
+                      submitStatus.type === 'success'
+                        ? 'bg-green-50 text-green-800 dark:bg-green-900/50 dark:text-green-300'
+                        : 'bg-red-50 text-red-800 dark:bg-red-900/50 dark:text-red-300'
+                    }`}
+                  >
+                    {submitStatus.message}
+                  </div>
+                )}
+
                 <div>
                   <button
                     type="submit"
-                    className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    disabled={isSubmitting}
+                    className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
+                      isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
+                    }`}
                   >
-                    Send Message
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>
                 </div>
+
+                <p className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
+                  Or email me directly at{' '}
+                  <a
+                    href="mailto:ashwaghashwagh@gmail.com"
+                    className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                  >
+                    ashwaghashwagh@gmail.com
+                  </a>
+                </p>
               </form>
             </motion.div>
           </div>
