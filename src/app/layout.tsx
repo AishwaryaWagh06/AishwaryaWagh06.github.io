@@ -4,13 +4,12 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
-import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Your Portfolio',
-  description: 'Professional portfolio showcasing my work and skills',
+  title: 'Aishwarya Wagh | AIML Engineer',
+  description: 'Professional portfolio showcasing my work as an AIML Engineer and Technology Enthusiast',
 }
 
 export default function RootLayout({
@@ -20,18 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <head>
-        <Script id="theme-script" strategy="beforeInteractive">
-          {`
-            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-              document.documentElement.classList.add('dark')
-            } else {
-              document.documentElement.classList.remove('dark')
-            }
-          `}
-        </Script>
-      </head>
-      <body className={`${inter.className} bg-white dark:bg-gray-900`}>
+      <body className={`${inter.className} bg-white dark:bg-gray-900 text-gray-900 dark:text-white antialiased`}>
         <Navigation />
         <main className="min-h-screen">
           {children}
