@@ -1,16 +1,19 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import imageLoader from '../image-loader';
 import emailjs from '@emailjs/browser';
 
+// Initialize EmailJS
+emailjs.init("9VaiECe9UQ02-2pZi");
+
 export default function Home() {
   const form = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    user_name: '',
+    user_email: '',
     subject: '',
     message: ''
   });
@@ -40,13 +43,13 @@ export default function Home() {
           type: 'success',
           message: 'Message sent successfully! I will get back to you soon.'
         });
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        setFormData({ user_name: '', user_email: '', subject: '', message: '' });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('EmailJS error:', error);
       setSubmitStatus({
         type: 'error',
-        message: 'Failed to send message. Please try again or email me directly.'
+        message: error.message || 'Failed to send message. Please try again or email me directly.'
       });
     } finally {
       setIsSubmitting(false);
@@ -423,14 +426,14 @@ export default function Home() {
             >
               <form ref={form} onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <label htmlFor="user_name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Your Name
                   </label>
                   <input
                     type="text"
-                    id="name"
+                    id="user_name"
                     name="user_name"
-                    value={formData.name}
+                    value={formData.user_name}
                     onChange={handleChange}
                     placeholder="Enter your name"
                     required
@@ -438,14 +441,14 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <label htmlFor="user_email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Email Address
                   </label>
                   <input
                     type="email"
-                    id="email"
+                    id="user_email"
                     name="user_email"
-                    value={formData.email}
+                    value={formData.user_email}
                     onChange={handleChange}
                     placeholder="Enter your email"
                     required
