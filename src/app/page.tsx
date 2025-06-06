@@ -22,6 +22,8 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!form.current) return;
+
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: '' });
 
@@ -29,7 +31,7 @@ export default function Home() {
       const result = await emailjs.sendForm(
         'service_zgf5qwn',
         'template_0xm5ttr',
-        form.current!,
+        form.current,
         '9VaiECe9UQ02-2pZi'
       );
 
@@ -52,10 +54,11 @@ export default function Home() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   return (

@@ -10,7 +10,13 @@ export default function EmailJSProvider({
 }) {
   useEffect(() => {
     // Initialize EmailJS with your public key
-    emailjs.init('9VaiECe9UQ02-2pZi');
+    emailjs.init({
+      publicKey: '9VaiECe9UQ02-2pZi',
+      limitRate: {
+        // Optional rate limiting
+        throttle: 2000, // 2 seconds
+      },
+    });
   }, []);
 
   return <>{children}</>;
