@@ -108,8 +108,10 @@ export default function Home() {
               </a>
               <a
                 href="/documents/AishwaryaWagh_Resume.pdf"
-                download
+                download="AishwaryaWagh_Resume.pdf"
                 className="px-8 py-3 rounded-full bg-green-600 text-white hover:bg-green-700 transition-colors flex items-center gap-2"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
