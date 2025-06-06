@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import imageLoader from '../image-loader';
 
 export default function Home() {
   return (
@@ -97,7 +98,8 @@ export default function Home() {
               className="relative h-[500px] md:h-[600px] rounded-2xl overflow-hidden shadow-xl"
             >
               <Image
-                src="/profile.jpg"
+                loader={imageLoader}
+                src="./profile.jpg"
                 alt="Aishwarya Wagh - AIML Engineer"
                 fill
                 className="object-cover object-[center_15%]"
@@ -222,13 +224,13 @@ export default function Home() {
                 title: "Hotel Management System",
                 description: "A comprehensive web application featuring hotel browsing, booking system, secure payment processing, and administrative management dashboard.",
                 tech: ["HTML", "CSS", "JavaScript", "Python", "Flask/Django", "MySQL"],
-                image: "/project-placeholder.jpg"
+                image: "./project-placeholder.jpg"
               },
               {
                 title: "Smart Onion Warehouse",
                 description: "An innovative IoT-based warehouse management system with real-time environmental monitoring, automated alert systems, and data analytics for optimal storage conditions.",
                 tech: ["Arduino/ESP32", "IoT Sensors", "Python", "Firebase", "ThingSpeak"],
-                image: "/project-placeholder.jpg"
+                image: "./project-placeholder.jpg"
               }
             ].map((project, idx) => (
               <motion.div
@@ -241,6 +243,7 @@ export default function Home() {
               >
                 <div className="relative h-48">
                   <Image
+                    loader={imageLoader}
                     src={project.image}
                     alt={project.title}
                     fill

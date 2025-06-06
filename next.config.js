@@ -9,6 +9,11 @@ const nextConfig = {
   basePath: '',
   assetPrefix: '',
   trailingSlash: true,
+  distDir: 'out',
+  images: {
+    loader: 'custom',
+    loaderFile: './src/image-loader.ts',
+  }
 }
 
 module.exports = nextConfig 
