@@ -151,43 +151,19 @@ export default function Home() {
             {[
               {
                 category: "Programming Languages",
-                skills: [
-                  { name: "Python", level: 85 },
-                  { name: "Java", level: 80 },
-                  { name: "C", level: 75 },
-                  { name: "C++", level: 70 },
-                  { name: "JavaScript", level: 65 },
-                ]
+                skills: ["Python", "Java", "C", "C++", "JavaScript"]
               },
               {
                 category: "AI/ML Technologies",
-                skills: [
-                  { name: "Machine Learning", level: 80 },
-                  { name: "Deep Learning", level: 75 },
-                  { name: "TensorFlow", level: 70 },
-                  { name: "Scikit-learn", level: 75 },
-                  { name: "Pandas & NumPy", level: 80 },
-                ]
+                skills: ["Machine Learning", "Deep Learning", "TensorFlow", "Scikit-learn", "Pandas & NumPy"]
               },
               {
                 category: "Web Development",
-                skills: [
-                  { name: "HTML/CSS", level: 80 },
-                  { name: "Flask", level: 75 },
-                  { name: "Django", level: 70 },
-                  { name: "MySQL", level: 75 },
-                  { name: "REST APIs", level: 70 },
-                ]
+                skills: ["HTML/CSS", "Flask", "Django", "MySQL", "REST APIs"]
               },
               {
                 category: "IoT & Hardware",
-                skills: [
-                  { name: "Arduino", level: 80 },
-                  { name: "ESP32", level: 75 },
-                  { name: "IoT Sensors", level: 75 },
-                  { name: "Firebase", level: 70 },
-                  { name: "ThingSpeak", level: 70 },
-                ]
+                skills: ["Arduino", "ESP32", "IoT Sensors", "Firebase", "ThingSpeak"]
               }
             ].map((category, idx) => (
               <motion.div
@@ -199,20 +175,14 @@ export default function Home() {
                 className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg"
               >
                 <h3 className="text-xl font-bold mb-4">{category.category}</h3>
-                <div className="space-y-4">
+                <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill, skillIdx) => (
-                    <div key={skillIdx}>
-                      <div className="flex justify-between mb-1">
-                        <span className="text-gray-700 dark:text-gray-300">{skill.name}</span>
-                        <span className="text-blue-600 dark:text-blue-400">{skill.level}%</span>
-                      </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div
-                          className="bg-blue-600 dark:bg-blue-500 h-2 rounded-full"
-                          style={{ width: `${skill.level}%` }}
-                        />
-                      </div>
-                    </div>
+                    <span
+                      key={skillIdx}
+                      className="px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400"
+                    >
+                      {skill}
+                    </span>
                   ))}
                 </div>
               </motion.div>
