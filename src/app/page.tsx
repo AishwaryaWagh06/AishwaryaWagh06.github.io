@@ -75,14 +75,18 @@ export default function Home() {
       <section className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-            >
-              Hi, I'm Aishwarya Wagh
-            </motion.h1>
+            <div className="flex flex-col items-center justify-center">
+              <div className="w-48 h-48 rounded-full overflow-hidden mb-6 border-4 border-green-600 shadow-lg">
+                <Image
+                  src="/profile.jpg"
+                  alt="Aishwarya Wagh"
+                  width={192}
+                  height={192}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">Hi, I&apos;m Aishwarya Wagh</h1>
+            </div>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -118,8 +122,8 @@ export default function Home() {
                 View Projects
               </a>
               <a
-                href="/resume_2024.pdf"
-                download="resume_2024.pdf"
+                href="/aishwarya_Resume.pdf"
+                download="aishwarya_Resume.pdf"
                 className="px-8 py-3 rounded-full bg-green-600 text-white hover:bg-green-700 transition-colors flex items-center gap-2"
                 target="_blank"
                 rel="noopener noreferrer"
