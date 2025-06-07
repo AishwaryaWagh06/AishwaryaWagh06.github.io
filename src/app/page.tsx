@@ -118,8 +118,8 @@ export default function Home() {
                 View Projects
               </a>
               <a
-                href="./aishwarya_Resume.pdf"
-                download="aishwarya_Resume.pdf"
+                href="/AishwaryaWagh_Resume.pdf"
+                download="AishwaryaWagh_Resume.pdf"
                 className="px-8 py-3 rounded-full bg-green-600 text-white hover:bg-green-700 transition-colors flex items-center gap-2"
                 target="_blank"
                 rel="noopener noreferrer"
